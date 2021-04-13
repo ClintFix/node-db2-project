@@ -19,16 +19,16 @@ const checkCarPayload = (req, res, next) => {
   const {vin, make, model, mileage} = req.body;
   switch(true) {
     case (!vin):
-      res.status(400).json({message: `${vin} is missing`})
+      res.status(400).json({message: `vin is missing`})
       break;
     case (!make):
-      res.status(400).json({message: `${make} is missing`})
+      res.status(400).json({message: `make is missing`})
       break;
     case (!model):
-      res.status(400).json({message: `${model} is missing`})
+      res.status(400).json({message: `model is missing`})
       break;
     case (!mileage):
-      res.status(400).json({message: `${mileage} is missing`})
+      res.status(400).json({message: `mileage is missing`})
       break;
     default:
       next();

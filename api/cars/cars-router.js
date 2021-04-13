@@ -2,7 +2,7 @@
 const router = require("express").Router();
 const Cars = require('./cars-model');
 
-const {checkCarId} = require("./cars-middleware");
+const {checkCarId, checkCarPayload} = require("./cars-middleware");
 
 router.get('/', (req, res, next) => {
     Cars.getAll()
@@ -16,6 +16,16 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', checkCarId, (req, res, next) => {
     res.status(200).json(req.account);
+})
+
+router.post('/', checkCarPayload, async (req, res, next) => {
+    try {
+        const newCar = await Cars.create(req.body);
+        res.status(201).json(newCar)
+    }
+    catch(err) {
+        next(err);
+    }
 })
 
 //Error Handling
